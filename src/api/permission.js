@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 
 const base_url = "/admin/system/permission"
-const menuApi = {
+const permissionApi = {
   /** 获取所有角色 */
   list() {
     return request({
@@ -45,4 +45,4 @@ const menuApi = {
   }
 }
 
-export default menuApi
+export default permissionApi

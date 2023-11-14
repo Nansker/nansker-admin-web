@@ -155,7 +155,7 @@
 
 <script>
 import message from "@/utils/message";
-import menuApi from "@/api/menu";
+import permissionApi from "@/api/permission";
 
 export default {
   name:"MenuIndex",
@@ -181,7 +181,7 @@ export default {
     /** 初始化数据 */
     async fetchData() {
       this.listLoading = true
-      const response = await menuApi.list(this.queryParams)
+      const response = await permissionApi.list(this.queryParams)
       this.list = response.data
       this.listLoading = false
 
@@ -214,7 +214,7 @@ export default {
     async handleUpdate(row) {
       this.dialogShow = true
       this.dialogTitle = "修改菜单信息"
-      const response = await menuApi.getById(row.id)
+      const response = await permissionApi.getById(row.id)
       this.dialogFrom = response.data
     },
 
@@ -222,7 +222,7 @@ export default {
     handleRemove(row) {
       const that = this
       message.confirm('确认删除【' + row.name + '】的信息？', async function () {
-        await menuApi.remove(row.id)
+        await permissionApi.remove(row.id)
         message.success("删除成功")
         await that.fetchData()
       })
@@ -237,13 +237,13 @@ export default {
     async dialogSubmitForm() {
       if (this.dialogFrom.id) {
         //修改
-        await menuApi.update(this.dialogFrom)
+        await permissionApi.update(this.dialogFrom)
         message.success("修改成功")
         this.dialogCancel()
         await this.fetchData();
       } else {
         //添加
-        await menuApi.save(this.dialogFrom)
+        await [permissionApi].save(this.dialogFrom)
         message.success("添加成功")
         this.dialogCancel()
         await this.fetchData();

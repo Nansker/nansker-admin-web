@@ -23,7 +23,7 @@
 
 <script>
 import message from "@/utils/message";
-import menuApi from "@/api/menu";
+import permissionApi from "@/api/permission";
 import roleApi from "@/api/role";
 
 export default {
@@ -59,7 +59,7 @@ export default {
       this.roleInfo = roleResp.data
 
       //获取菜单列表
-      const menuListResp = await menuApi.list()
+      const menuListResp = await permissionApi.list()
       this.list = menuListResp.data
 
       await this.setMenuTreeNode()
@@ -71,8 +71,8 @@ export default {
       //获取角色已分配权限
       const roleMenuResp = await roleApi.getMenuById(this.roleId);
       roleMenuResp.data.forEach(menu => {
-        this.oldRoleMenuIds.push(menu.menuId)
-        this.$refs.menuTree.setChecked(menu.menuId, true)
+        this.oldRoleMenuIds.push(menu.permissionId)
+        this.$refs.menuTree.setChecked(menu.permissionId, true)
       })
 
       //使用这个方法会出现无法正确选择节点的问题
